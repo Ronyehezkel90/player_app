@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import TrackList from '../constants/TracksList';
+import TrackList from '../Constants/TracksList';
 import Track from "../Track/Track";
 import './looper.css'
 

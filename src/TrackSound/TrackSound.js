@@ -5,7 +5,7 @@ import './trackSound.css';
 import CircularProgressBar from "../CircularProgressBar/CircularProgressBar";
 
 
-class MySound extends React.Component {
+class Voice extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -67,9 +67,9 @@ export default class TrackSound extends React.Component {
     render() {
         return (
             <div>
-                <MySound {...this.props} position={this.state.position}
-                         onLoading={(val) => this.setDuration(val)}
-                         handleSongPlaying={this.handleSongPlaying} onLoad={this.onLoad} onStop={this.onStop}/>
+                <Voice {...this.props} position={this.state.position}
+                       onLoading={(val) => this.setDuration(val)}
+                       handleSongPlaying={this.handleSongPlaying} onLoad={this.onLoad} onStop={this.onStop}/>
                 <CircularProgressBar percentage={this.props.playing ? this.state.percent : 0}>
                         <span
                             className={this.props.playing ? "glyphicon glyphicon-pause" : "glyphicon glyphicon-play"}
