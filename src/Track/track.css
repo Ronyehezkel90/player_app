@@ -1,0 +1,13 @@
+
+.track {
+    padding: 10px 20px;
+    border-bottom: 1px solid black;
+}
+
+.volume-container {
+    margin-top: 20px;
+}
+
+p {
+    margin-bottom: 5px;
+}

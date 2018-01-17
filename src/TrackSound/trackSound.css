@@ -1,0 +1,23 @@
+#app {
+    margin-top: 40px;
+}
+
+#progressInput {
+    margin: 20px auto;
+    width: 30%;
+}
+
+.circle-background,
+.circle-progress {
+    fill: none;
+}
+
+.circle-background {
+    stroke: #ddd;
+}
+
+.circle-progress {
+    stroke: red;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}

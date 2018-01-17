@@ -1,0 +1,39 @@
+
+#app {
+    margin-top: 40px;
+}
+
+#progressInput {
+    margin: 20px auto;
+    width: 30%;
+
+}
+
+.circle-background,
+.circle-progress {
+    fill: none;
+}
+
+.circle-background {
+    stroke: #ddd;
+
+}
+
+.circle-progress {
+
+    stroke: red;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.glyphicon-play, .glyphicon-pause {
+    position: absolute;
+    top: 9px;
+    left: 12px;
+    font-size: 30px;
+
+}
+
+.circular-progress-bar {
+    position: relative;
+}
