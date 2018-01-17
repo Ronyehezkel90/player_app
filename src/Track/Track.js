@@ -13,7 +13,7 @@ class Track extends React.Component {
             volume: 50,
             playing: false,
             origin: false,
-            playingAll: false
+            playingAll: false,
         };
         this.shuffleSound = this.shuffleSound.bind(this);
         this.removeTrack = this.removeTrack.bind(this);

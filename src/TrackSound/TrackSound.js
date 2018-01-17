@@ -6,10 +6,6 @@ import CircularProgressBar from "../CircularProgressBar/CircularProgressBar";
 
 
 class Voice extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     shouldComponentUpdate(nextProps) {
         return (this.props.playing !== nextProps.playing || this.props.volume !== nextProps.volume || this.props.refresh !== nextProps.refresh);
     }
@@ -41,6 +37,7 @@ export default class TrackSound extends React.Component {
         this.onStop = this.onStop.bind(this);
         this.handleSongPlaying = this.handleSongPlaying.bind(this);
         this.state = {percent: 0, position: 0}
+        this.needRefresh = false;
     }
 
     handleSongPlaying(playingData) {
@@ -65,10 +62,14 @@ export default class TrackSound extends React.Component {
             this.props.setTrackAttribute(this.props.id, "duration", parseInt(val.duration))
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        this.needRefresh = !prevProps.refresh && this.props.refresh;
+    }
+
     render() {
         return (
             <div>
-                <Voice {...this.props} position={this.props.refresh ? 0 : this.state.position}
+                <Voice {...this.props} position={this.needRefresh ? 0 : this.state.position}
                        onLoading={(val) => this.setDuration(val)}
                        handleSongPlaying={this.handleSongPlaying} onLoad={this.onLoad} onStop={this.onStop}/>
                 <CircularProgressBar percentage={this.props.playing ? this.state.percent : 0}>
