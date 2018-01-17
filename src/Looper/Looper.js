@@ -41,7 +41,6 @@ export default class Looper extends React.Component {
     }
 
     shuffleSyncAll() {
-        var a = this.getMaxBpm();
         this.setState({sync: !this.state.sync, maxBpm: this.getMaxBpm(), playingAll: !this.state.sync});
     }
 
