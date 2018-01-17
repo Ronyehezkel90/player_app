@@ -41,6 +41,7 @@ export default class Looper extends React.Component {
     }
 
     shuffleSyncAll() {
+        var a = this.getMaxBpm();
         this.setState({sync: !this.state.sync, maxBpm: this.getMaxBpm(), playingAll: !this.state.sync});
     }
 
@@ -49,9 +50,10 @@ export default class Looper extends React.Component {
     }
 
     getMaxBpm() {
-        return Math.max.apply(Math, _.map(this.state.trackList, (track) => {
-            return track.bpm;
-        }));
+        var bpmList = _.map(this.state.trackList, (track) => {
+            return track['inLooper'] ? track.bpm : 0;
+        });
+        return Math.max.apply(Math, bpmList);
     }
 
     removeTrack(trackId) {
