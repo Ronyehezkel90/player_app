@@ -11,7 +11,7 @@ class Voice extends React.Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        return (this.props.playing !== nextProps.playing || this.props.volume !== nextProps.volume);
+        return (this.props.playing !== nextProps.playing || this.props.volume !== nextProps.volume || this.props.refresh !== nextProps.refresh);
     }
 
     render() {
@@ -28,6 +28,7 @@ class Voice extends React.Component {
                 onLoading={(val) => this.props.onLoading(val)}
                 onPlaying={(val) => this.props.handleSongPlaying(val)}
                 onStop={this.props.onStop}
+                onFinishedPlaying={this.props.onStop}
             />
         )
     }
@@ -67,7 +68,7 @@ export default class TrackSound extends React.Component {
     render() {
         return (
             <div>
-                <Voice {...this.props} position={this.state.position}
+                <Voice {...this.props} position={this.props.refresh ? 0 : this.state.position}
                        onLoading={(val) => this.setDuration(val)}
                        handleSongPlaying={this.handleSongPlaying} onLoad={this.onLoad} onStop={this.onStop}/>
                 <CircularProgressBar percentage={this.props.playing ? this.state.percent : 0}>

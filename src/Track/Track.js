@@ -12,41 +12,24 @@ class Track extends React.Component {
         this.state = {
             volume: 50,
             playing: false,
-            origin: false
+            origin: false,
+            playingAll: false
         };
-        this.button_clicked = false;
         this.shuffleSound = this.shuffleSound.bind(this);
-        this.getPlayingStatus = this.getPlayingStatus.bind(this);
         this.removeTrack = this.removeTrack.bind(this);
         this.showOriginalBpm = this.showOriginalBpm.bind(this);
-
     }
 
     shuffleSound() {
-        this.button_clicked = true;
-        this.setState({playing: !this.state.playing}, () => {
-            this.button_clicked = false;
-        });
+        this.setState({playing: !this.state.playing});
     }
 
     changeVolume(volume) {
-        if (this.state.playing) {
-            this.button_clicked = true;
-            this.setState({volume: volume}, () => {
-                this.button_clicked = false;
-            });
-        }
-        else if (this.props.playing) {
-            this.setState({volume: volume});
-        }
+        this.setState({volume: volume});
     }
 
     removeTrack() {
         this.props.removeTrack(this.props.id);
-    }
-
-    getPlayingStatus() {
-        return this.button_clicked ? this.state.playing : this.props.playing;
     }
 
     showOriginalBpm() {
@@ -55,16 +38,20 @@ class Track extends React.Component {
     }
 
     render() {
+        if (this.props.playingAll !== this.state.playingAll) {
+            this.setState({playing: this.props.playingAll, playingAll: this.props.playingAll});
+        }
         return (
             <div className="track row" id={this.props.id}>
                 <div className="col-sm-2" id={this.props.id + 'progress_bar'}>
                     <TrackSound url={this.props.url}
-                                playing={this.getPlayingStatus()}
-                                loop={!this.button_clicked}
+                                playing={this.state.playing}
+                                loop={this.state.playingAll}
                                 id={this.props.id}
                                 setTrackAttribute={this.props.setTrackAttribute}
                                 shuffleSound={this.shuffleSound}
                                 volume={this.state.volume}
+                                refresh={this.state.playing && this.state.playingAll}
                     />
                 </div>
                 <div className="col-sm-5 text-left">
@@ -96,15 +83,12 @@ class Track extends React.Component {
                                         onChange={(value) => this.changeVolume(value)}
                                         value={this.state.volume}/>
                         </div>
-
                     </div>
-
                 </div>
             </div>
+
         )
     }
-
-
 }
 
 export default Track;
